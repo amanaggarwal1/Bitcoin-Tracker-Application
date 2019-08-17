@@ -68,6 +68,8 @@ public class MainActivity extends Activity {
             public void onSuccess(int statusCode, Header[] header, JSONObject response) {
                 Log.d("Bitcoin", "onSuccess() called");
                 Log.d("Bitcoin", "Json : " + response.toString());
+                CurrencyHandler currency = CurrencyHandler.CurrencyHandler(response);
+                updateUI(currency);
             }
 
             @Override
@@ -82,5 +84,13 @@ public class MainActivity extends Activity {
 
         });
 
+    }
+
+    private void updateUI(CurrencyHandler currency) {
+        Log.d("Bitcoin", "updateUI() called");
+        String currentValue = String.valueOf(currency.getCurrentValue());
+        Log.d("Bitcoin", "value : " + currentValue);
+        mPriceLabelText.setText(currentValue);
+        Log.d("Bitcoin", "Value Printed");
     }
 }
